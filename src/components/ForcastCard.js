@@ -10,7 +10,7 @@ const ForecastCard = ({ weatherForecast }) => {
   return (
     <Card>
       <ForecastContent>
-        <StrongContent mb='1rem' size='1.4rem'>3 hour ForeCast</StrongContent>
+        <DescriptionContent mb='1rem' size='1.4rem'>3 hour ForeCast</DescriptionContent>
 
         {showday.map((day) => {
           const showdayData = getShowdayData(weatherForecast, day)
@@ -39,6 +39,7 @@ const ForecastCard = ({ weatherForecast }) => {
             </ItemBox>
           )
         })}
+
       </ForecastContent>
     </Card >
   )

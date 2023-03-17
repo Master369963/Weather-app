@@ -26,7 +26,7 @@ function App() {
   })
 
   const [isLoading, setIsLoading] = useState(false)
-  const [refreshBtnDisabled, setRefreshBtnDisabled] = useState(false)
+  const [refreshBtnDisabled, setRefreshBtnDisabled] = useState(true)
 
   const fetchCurrentWeather = () => {
     try {
@@ -37,11 +37,8 @@ function App() {
           const formattedDate = date.format('ddd, MMM D')
           const formmatedTime = date.format('HH:mm')
           const currentTime = moment().format('HH:mm')
-          const AvailableUpdatedTime = date.add(15, 'minutes').format('HH:mm')
-          const waitingTime = moment.duration(moment(AvailableUpdatedTime, 'HH:mm').diff(moment(currentTime, 'HH:mm'))).asMinutes()
-
-
-          console.log(currentTime, formmatedTime, AvailableUpdatedTime, waitingTime)
+          const activeBtnTime = date.add(15, 'minutes').format('HH:mm')
+          const waitingTime = moment.duration(moment(activeBtnTime, 'HH:mm').diff(moment(currentTime, 'HH:mm'))).asMinutes()
 
           return {
             description: Apidata.weather[0].description,
@@ -54,7 +51,7 @@ function App() {
             windDirect: Apidata.wind.deg,
             updatedTime: formmatedTime,
             updatedDate: formattedDate,
-            waitToUpdate: 1,
+            waitToUpdate: waitingTime,
           }
         })
     } catch (error) {
@@ -81,18 +78,17 @@ function App() {
     }
   }
 
+
   useEffect(() => {
-    setRefreshBtnDisabled(true)
     const fetchData = async () => {
       try {
         const [currentWeather, forecastWeather] = await Promise.all([
           fetchCurrentWeather(),
           fetchweatherForecast(),
         ])
-
         setWeatherData({ ...currentWeather })
         setweatherForecast({ ...forecastWeather })
-        console.log(currentWeather)
+        console.log('show', currentWeather)
 
         setTimeout(() => {
           setRefreshBtnDisabled(false)
@@ -125,7 +121,7 @@ function App() {
     }, 2000);
     setTimeout(() => {
       setRefreshBtnDisabled(false);
-    }, 2 * 60 * 1000);
+    }, currentWeather.waitToUpdate * 60 * 1000);
   }
 
   return (
