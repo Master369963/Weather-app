@@ -64,6 +64,7 @@ export const GeneralContent = styled.p`
   margin-bottom: ${({ mb }) => mb};
   text-transform: capitalize;
   font-size: 1.6rem;
+  height: 18px;
 `
 
 export const StrongContent = styled(GeneralContent)`

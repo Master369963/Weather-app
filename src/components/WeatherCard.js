@@ -10,7 +10,7 @@ const WeatherCard = ({ weatherData, handleRefresh, isLoading, disabled }) => {
       <MainContent >
         <TitleBox>
           <Location>London</Location>
-          <GeneralContent >{weatherData.updatedDate}</GeneralContent>
+          <GeneralContent>{weatherData.updatedDate}</GeneralContent>
         </TitleBox>
         <StrongContent mb='1rem'>{weatherData.description}</StrongContent>
         <CurrentWeather>
@@ -45,7 +45,7 @@ const WeatherCard = ({ weatherData, handleRefresh, isLoading, disabled }) => {
         </InfoBox>
       </InfoGroup>
       <UpdateBox>
-        <span>Last Update Time: {weatherData.updatedTime}</span>
+        <span>Last Update Time: {weatherData.updatedTime || '--:--'}</span>
         <Button
           onClick={handleRefresh}
           $loading={isLoading}
