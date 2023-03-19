@@ -1,18 +1,25 @@
 import './styles/Forcast.style'
-import { ForcastImg, ItemBox, SubTitle, ForecastContent, BoldContent, ForecastWrapper, TimeBox, DescriptionContent } from './styles/Forcast.style'
-import { Card, FlexCenterBox, GeneralContent, ImgCaption, StrongContent } from './styles/GlobalStyle.style'
+import { AccBox, AccInput, AccItem, AccLabel, AccBody, ForcastImg, ForecastContent, BoldContent, TimeBox, DescriptionContent, AccIcon } from './styles/Forcast.style'
+import { Card, FlexCenterBox, ImgCaption, StrongContent } from './styles/GlobalStyle.style'
 import { Clock } from './Tools/Icon'
 import { getShowdayList, formatweatherForecast, getShowdayData } from './Tools/ForeCastFn'
 
 const ForecastCard = ({ weatherForecast }) => {
 
+  const handleScroll = (e) => {
+    const clickedItem = document.getElementById(e.target.id)
+    const currentSection = clickedItem.nextElementSibling
+    currentSection.scrollIntoView({ behavior: 'smooth' })
+  }
+
   const showday = getShowdayList(weatherForecast)
   return (
     <Card>
       <ForecastContent>
-        <DescriptionContent mb='1rem' size='1.4rem'>3 hour ForeCast</DescriptionContent>
+        <DescriptionContent mb='1rem' size='1.4rem'>3 hour Forecast</DescriptionContent>
 
         {showday.map((day) => {
+
           const showdayData = getShowdayData(weatherForecast, day)
           const showdayOutput = showdayData.map((item, index) => {
             const formattedData = formatweatherForecast(item)
@@ -24,7 +31,7 @@ const ForecastCard = ({ weatherForecast }) => {
                 </TimeBox>
                 <ForcastImg>
                   <img src={formattedData.icon} alt="" />
-                  {formattedData.rain > 0 ? <ImgCaption>{formattedData.rain}%</ImgCaption> : null}
+                  {formattedData.rain > 0 ? <ImgCaption>{Math.round(formattedData.rain)}%</ImgCaption> : null}
                 </ForcastImg>
                 <DescriptionContent>{formattedData.description}</DescriptionContent>
                 <BoldContent>{formattedData.temp}°C</BoldContent>
@@ -33,13 +40,20 @@ const ForecastCard = ({ weatherForecast }) => {
           })
 
           return (
-            <ItemBox key={day}>
-              <SubTitle>{day}</SubTitle>
-              <ForecastWrapper>{showdayOutput}</ForecastWrapper>
-            </ItemBox>
+            <AccItem key={day} >
+              <AccInput type="radio" name='acc' id={`input_${day}`} defaultChecked={day === 'Today' ? true : false} onClick={handleScroll} />
+              <AccBox>
+                <AccLabel htmlFor={`input_${day}`}>
+                  {day}
+                  <AccIcon></AccIcon>
+                </AccLabel>
+                <AccBody>
+                  {showdayOutput}
+                </AccBody>
+              </AccBox>
+            </AccItem>
           )
         })}
-
       </ForecastContent>
     </Card >
   )

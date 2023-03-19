@@ -4,8 +4,6 @@ import ForcastCard from './components/ForcastCard';
 import WeatherCard from "./components/WeatherCard";
 import { useState, useEffect } from 'react';
 import moment from 'moment';
-import ForecastSeed from './components/Tools/ForecastSeed';
-
 
 
 function App() {
@@ -22,7 +20,7 @@ function App() {
     updatedDate: '',
   })
   const [weatherForecast, setweatherForecast] = useState({
-    weatherForecast: ForecastSeed.list,
+    weatherForecast: [],
   })
 
   const [isLoading, setIsLoading] = useState(false)
@@ -65,11 +63,11 @@ function App() {
     try {
       return fetch('https://api.openweathermap.org/data/2.5/forecast?q=London&units=metric&appid=c3cbce25f7dae705324902aaf56f6456')
         .then((response) => response.json())
-        .then((Apidata) => {
-          const trimData = Apidata.list.slice(0, 10)
+        .then((apiData) => {
+          const trimData = apiData.list.slice(0, 10)
 
           return {
-            weatherForecast: trimData,
+            weatherForecast: apiData.list,
           }
         })
     } catch (error) {
@@ -88,7 +86,6 @@ function App() {
         ])
         setWeatherData({ ...currentWeather })
         setweatherForecast({ ...forecastWeather })
-        console.log('show', currentWeather)
 
         setTimeout(() => {
           setRefreshBtnDisabled(false)
@@ -98,7 +95,6 @@ function App() {
         console.error(error)
       }
     }
-    console.log('useEffect')
     fetchData()
   }, [])
 
@@ -108,20 +104,19 @@ function App() {
     const [currentWeather, forecastWeather] = await Promise.all([
       fetchCurrentWeather(),
       fetchweatherForecast(),
-
     ])
 
     setWeatherData({ ...currentWeather })
     setweatherForecast({ ...forecastWeather })
 
-    console.log(currentWeather)
     setTimeout(() => {
       setIsLoading(false);
       setRefreshBtnDisabled(true)
+
+      setTimeout(() => {
+        setRefreshBtnDisabled(false);
+      }, currentWeather.waitToUpdate * 60 * 1000);
     }, 2000);
-    setTimeout(() => {
-      setRefreshBtnDisabled(false);
-    }, currentWeather.waitToUpdate * 60 * 1000);
   }
 
   return (

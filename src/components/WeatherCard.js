@@ -1,12 +1,12 @@
 import { Humidity, Wind, Rain, Refresh } from './Tools/Icon'
 import { Location, Image, Button, UpdateBox, CurrentWeather, Temperature, InfoBox, MainContent, TitleBox, InfoGroup, BtnCaption, } from './styles/WeatherCard'
-import { Card, ImgCaption, GeneralContent, StrongContent } from './styles/GlobalStyle.style'
+import { ImgCaption, GeneralContent, StrongContent, StickyCard } from './styles/GlobalStyle.style'
 
 
 const WeatherCard = ({ weatherData, handleRefresh, isLoading, disabled }) => {
-  console.log(disabled)
+
   return (
-    <Card>
+    <StickyCard>
       <MainContent >
         <TitleBox>
           <Location>London</Location>
@@ -49,7 +49,7 @@ const WeatherCard = ({ weatherData, handleRefresh, isLoading, disabled }) => {
           title="Please wait 15 minutes before refreshing again"><Refresh /></Button>
       </UpdateBox>
       <BtnCaption $disabled={disabled}>Please wait 15 mins before refreshing.</BtnCaption>
-    </Card>
+    </StickyCard>
   )
 }
 

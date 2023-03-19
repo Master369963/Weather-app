@@ -1,5 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Asap:wght@100;200;300;400;500;600;700&display=swap');
 
+:root {
+  --primary_01: #18194d;
+  --primary_light_a03: rgb(203, 206, 244, 0.3);
+  --primary_light_a02: rgb(203, 206, 244, 0.2);
+  --primary_light_a005: rgb(203, 206, 244, 0.1);
+  --text_default: #e2daf7d5;
+  --text_default_light: rgba(226, 218, 247, 0.452);
+  --text_strong: #fff;
+  --secondary: #FFD059;
+  --img_bg: #ffffff26;
+}
+
 html {
   font-size: 62.5%;
 }
@@ -11,6 +23,7 @@ body {
   height: 100%;
   width: 100%;
   font-family: 'Asap', sans-serif;
+  background: var(--primary_01);
 }
 
 *,
@@ -19,17 +32,9 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  color: #e2daf7d5;
+  color: var(--text_default);
 }
 
-:root {
-  --primary_01: #18194d;
-  --primary_light_a03: rgb(203, 206, 244, 0.3);
-  --primary_light_a02: rgb(203, 206, 244, 0.2);
-  --primary_light_a005: rgb(203, 206, 244, 0.05);
-  --text_default: #e2daf7d5;
-  --text_strong: #fff;
-  --secondary: #FFD059;
-  --img_bg: #ffffff26;
-
+ul {
+  list-style: none;
 }

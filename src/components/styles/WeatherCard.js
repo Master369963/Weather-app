@@ -8,6 +8,8 @@ export const FlexSBBox = styled.div`
 `
 
 export const MainContent = styled.div`
+  position: sticky;
+  top: 2rem;
   background: rgba(203, 206, 244, 0.3);
   padding: 2rem;
   border-radius: 10px;
@@ -66,7 +68,7 @@ export const InfoBox = styled.div`
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    background: var(--primary_light_a02);
+    background: var(--primary_light_a005);
     border-radius: 10px;
 `
 

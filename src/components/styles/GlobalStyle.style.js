@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  background: var(--primary_01);
-  height: 100vh;
+  padding:2rem 0;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  background: var(--primary_01);
 `
 
 export const FlexCenterBox = styled.div`
@@ -25,8 +25,14 @@ export const FlexColumnBox = styled.div`
 
 export const Card = styled.div`
   background: var(--primary_01);
-  padding: 3rem 2rem 0 2rem;
-  min-width: 360px;
+  padding: 3rem 2rem;
+  width: 420px;
+  max-width:420px;
+`
+
+export const StickyCard = styled(Card)`
+  position:sticky;
+  top: 2rem;
 `
 
 export const ImgCaption = styled.div`
