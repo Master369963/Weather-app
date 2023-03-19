@@ -18,7 +18,11 @@ const WeatherCard = ({ weatherData, handleRefresh, isLoading, disabled }) => {
             <Temperature>{weatherData.temperature}<span>°C</span></Temperature>
             <ImgCaption>Feels like {weatherData.feelTemp}°C</ImgCaption>
           </div>
-          <Image src={weatherData.icon} alt="weather icon" />
+          <Image>
+            {weatherData.icon &&
+              <img src={weatherData.icon} alt="weather icon" />
+            }
+          </Image>
         </CurrentWeather>
       </MainContent>
       <InfoGroup>

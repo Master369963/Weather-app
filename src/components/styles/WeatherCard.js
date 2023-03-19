@@ -43,9 +43,14 @@ export const Temperature = styled.div`
   }
 `
 
-export const Image = styled.img`
-  border-radius: 50%;
-  background: var(--img_bg);
+export const Image = styled.div`
+  width:100px;
+  height:100px;
+
+  img {
+    border-radius: 50%;
+    background: var(--img_bg);
+  }
 `
 
 export const InfoGroup = styled.div`
