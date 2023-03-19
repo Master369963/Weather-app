@@ -1,4 +1,5 @@
 import styled, { css, keyframes } from "styled-components";
+import { customMedia } from './GlobalStyle.style'
 
 export const FlexSBBox = styled.div`
   display: flex;
@@ -8,9 +9,6 @@ export const FlexSBBox = styled.div`
 `
 
 export const MainContent = styled.div`
-  position: sticky;
-  top: 2rem;
-  background: rgba(203, 206, 244, 0.3);
   padding: 2rem;
   border-radius: 10px;
   background: var(--primary_light_a03);
@@ -18,14 +16,14 @@ export const MainContent = styled.div`
 
 export const TitleBox = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 1.5rem;
 `
 
 export const Location = styled.h2`
-  font-size: 2.8rem;
   color: var(--text_strong);
+  font-size: 2.8rem;
 `
 
 export const CurrentWeather = styled(FlexSBBox)`
@@ -34,20 +32,20 @@ export const CurrentWeather = styled(FlexSBBox)`
 
 export const Temperature = styled.div`
   position: relative;
-  font-size: 7rem;
   color: var(--text_strong);
+  font-size: 7rem;
 
   span {
     position: relative;
     bottom: 25px;
-    font-size: 3.5rem;
     color: var(--secondary);
+    font-size: 3.5rem;
   }
 `
 
 export const Image = styled.img`
-  background: var(--img_bg);
   border-radius: 50%;
+  background: var(--img_bg);
 `
 
 export const InfoGroup = styled.div`
@@ -59,6 +57,10 @@ export const InfoGroup = styled.div`
   span {
     font-size: 1.5rem;
   }
+
+  ${customMedia.lessThan("mobile")`
+    flex-wrap: wrap;
+  `}
 `
 
 export const InfoBox = styled.div`
@@ -70,6 +72,13 @@ export const InfoBox = styled.div`
     gap: 1rem;
     background: var(--primary_light_a005);
     border-radius: 10px;
+
+    ${customMedia.lessThan("mobile")`
+      svg {
+        height:20px;
+        height:20px;
+      }
+    `}
 `
 
 export const UpdateBox = styled.div`
@@ -83,6 +92,10 @@ export const UpdateBox = styled.div`
     font-size: 1.4rem;
     margin-right:0.5rem;
   }
+
+  ${customMedia.lessThan("mobile")`
+    margin-top: 1rem;
+  `}
 `
 const rotate360 = keyframes`
   from {
