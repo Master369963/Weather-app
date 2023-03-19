@@ -13,7 +13,7 @@ export const formatDate = (dtTime) => {
 
 export const getShowdayList = ({ weatherForecast }) => {
   const showDayList = []
-  weatherForecast.map((listItem) => {
+  weatherForecast.forEach((listItem) => {
     const formattedDate = formatDate(listItem.dt)
     if (!showDayList.includes(formattedDate.showday)) {
       showDayList.push(formattedDate.showday)

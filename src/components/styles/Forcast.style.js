@@ -93,8 +93,7 @@ export const AccLabel = styled.label`
 `
 
 export const AccBody = styled.div`
-  position: relative;
-  left: -360px;
+  display: none;
   padding: 1rem 2rem;
   width: 100%;
   color: rgba(0,0,0,.54);
@@ -155,8 +154,7 @@ export const AccInput = styled.input`
     }
 
     ${AccBody} {
-      top: 100%;
-      left: 0;
+      display: block;
       width: 100%;
       opacity: 1;
       transition: left .5s ease-in-out, opacity .2s ease .15s;

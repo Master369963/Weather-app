@@ -129,9 +129,7 @@ export const Button = styled.button`
   &:active {
   transform: translateY(2px);
 }
-
   /* animation: ${(props) => props.$loading === true ? css`${rotate360} 1s ease infinite` : ''}; */
-
   ${(props) => props.$loading &&
     css`
       animation: ${rotate360} 1s linear Infinite;
