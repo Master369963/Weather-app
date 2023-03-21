@@ -8,18 +8,21 @@ This is a weather app built with React which displays the current weather and 5-
 
 ## Project Screenshot(s)
 
-![image]()
+### Main page
+![image](https://github.com/Master369963/weather-app/blob/main/ReadmeAssets/weather%20app.png)
+
+### Favicon for iOS
+![image](https://github.com/Master369963/weather-app/blob/main/ReadmeAssets/favicon%20for%20iOS.png)
 
 ## Features
 
 * Users can see the current weather of a specific location, including temperature, weather condition, and wind speed.
 * Users can see a 5-day forecast with 3-hour step, including the temperature and weather condition of each day.
-* User can click the refresh button to get the latest weather information.
+* Users can click the refresh button to get the latest weather information.
 * The web app is responsive and can be used on both desktop and mobile devices.
-* User can add this app to their home screen for easy access by opening with the web browser and then follow the instructions for your device:
-
-`iOS: Tap the "Share" button in Safari, and then select "Add to Home Screen".`
-`Android: Tap the "Menu" button in Chrome, and then select "Add to Home Screen".`
+* Users can add this app to their home screen for easy access by opening with the web browser and then follow the instructions for your device:
+  - iOS: Tap the "Share" button in Safari, and then select "Add to Home Screen".
+  - Android: Tap the "Menu" button in Chrome, and then select "Add to Home Screen".
 
 ## Future Development
 
