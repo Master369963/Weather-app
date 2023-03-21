@@ -5,6 +5,8 @@ import WeatherCard from "./components/WeatherCard";
 import { useState, useEffect } from 'react';
 import moment from 'moment';
 
+const apiKey = 'c3cbce25f7dae705324902aaf56f6456'
+
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -28,7 +30,7 @@ function App() {
 
   const fetchCurrentWeather = () => {
     try {
-      return fetch('https://api.openweathermap.org/data/2.5/weather?q=London&units=metric&appid=c3cbce25f7dae705324902aaf56f6456')
+      return fetch(`https://api.openweathermap.org/data/2.5/weather?q=London&units=metric&appid=${apiKey}`)
         .then((response) => response.json())
         .then((Apidata) => {
           const date = moment.unix(Apidata.dt)
@@ -61,7 +63,7 @@ function App() {
 
   const fetchweatherForecast = () => {
     try {
-      return fetch('https://api.openweathermap.org/data/2.5/forecast?q=London&units=metric&appid=c3cbce25f7dae705324902aaf56f6456')
+      return fetch(`https://api.openweathermap.org/data/2.5/forecast?q=London&units=metric&appid=${apiKey}`)
         .then((response) => response.json())
         .then((apiData) => {
           const trimData = apiData.list.slice(0, 10)
