@@ -7,7 +7,6 @@ export const customMedia = generateMedia({
   mobile: "46em",  //736px
 })
 
-
 export const Container = styled.div`
   padding:2rem 0;
   display: flex;

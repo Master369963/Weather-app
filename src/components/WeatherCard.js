@@ -1,15 +1,21 @@
 import { Humidity, Wind, Rain, Refresh } from './Tools/Icon'
-import { Location, Image, Button, UpdateBox, CurrentWeather, Temperature, InfoBox, MainContent, TitleBox, InfoGroup, BtnCaption, } from './styles/WeatherCard'
+import { LogoBox, Location, Image, Button, UpdateBox, CurrentWeather, Temperature, InfoBox, MainContent, TitleBox, InfoGroup, BtnCaption, } from './styles/WeatherCard'
 import { ImgCaption, GeneralContent, StrongContent, StickyCard } from './styles/GlobalStyle.style'
+import logo from './styles/happyday logo.png'
+import WeatherSetting from './SearchCity'
 
 
-const WeatherCard = ({ weatherData, handleRefresh, isLoading, disabled }) => {
+const WeatherCard = ({ weatherData, handleRefresh, isLoading, disabled, searchHandler, displayCity }) => {
 
   return (
     <StickyCard>
+      <LogoBox>
+        <img src={logo} alt="logo" />
+      </LogoBox>
+      <WeatherSetting onSearchChange={searchHandler} />
       <MainContent >
         <TitleBox>
-          <Location>London</Location>
+          <Location>{displayCity}</Location>
           <GeneralContent>{weatherData.updatedDate}</GeneralContent>
         </TitleBox>
         <StrongContent mb='1rem'>{weatherData.description}</StrongContent>

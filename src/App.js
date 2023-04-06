@@ -4,36 +4,48 @@ import ForcastCard from './components/ForcastCard';
 import WeatherCard from "./components/WeatherCard";
 import { useState, useEffect } from 'react';
 import moment from 'moment';
-
-const apiKey = 'c3cbce25f7dae705324902aaf56f6456'
+import { apiKey, weather_URL } from './components/Tools/Api';
 
 
 function App() {
   const [weatherData, setWeatherData] = useState({
-    description: '',
-    icon: '',
-    temperature: 0,
-    feelTemp: 0,
-    humilidy: 0,
-    wind: 0,
-    rain: 0,
-    windDirect: 0,
-    updatedTime: '',
-    updatedDate: '',
+    // description: '',
+    // icon: '',
+    // temperature: 0,
+    // feelTemp: 0,
+    // humilidy: 0,
+    // wind: 0,
+    // rain: 0,
+    // windDirect: 0,
+    // updatedTime: '',
+    // updatedDate: '',
   })
   const [weatherForecast, setweatherForecast] = useState({
     weatherForecast: [],
   })
-
   const [isLoading, setIsLoading] = useState(false)
   const [refreshBtnDisabled, setRefreshBtnDisabled] = useState(true)
+  const [displayCity, setDisplayCity] = useState({
+    city: 'London',
+    lat: 51.5073,
+    lon: -0.1276,
+  })
+
+  const onSearchChangeHandler = (searchValue) => {
+    const [lat, lon] = searchValue.value.split(" ")
+    setDisplayCity({ lat, lon, city: searchValue.label })
+
+
+    console.log('app', searchValue, lat, lon)
+
+  }
 
   const fetchCurrentWeather = () => {
     try {
-      return fetch(`https://api.openweathermap.org/data/2.5/weather?q=London&units=metric&appid=${apiKey}`)
+      return fetch(`${weather_URL}/weather?lat=${displayCity.lat}&lon=${displayCity.lon}&units=metric&appid=${apiKey}`)
         .then((response) => response.json())
-        .then((Apidata) => {
-          const date = moment.unix(Apidata.dt)
+        .then((apiData) => {
+          const date = moment.unix(apiData.dt)
           const formattedDate = date.format('ddd, MMM D')
           const formmatedTime = date.format('HH:mm')
           const currentTime = moment().format('HH:mm')
@@ -41,14 +53,14 @@ function App() {
           const waitingTime = moment.duration(moment(activeBtnTime, 'HH:mm').diff(moment(currentTime, 'HH:mm'))).asMinutes()
 
           return {
-            description: Apidata.weather[0].description,
-            icon: `https://openweathermap.org/img/wn/${Apidata.weather[0].icon}@2x.png`,
-            temperature: Math.round(Apidata.main.temp),
-            feelTemp: Math.round(Apidata.main.feels_like),
-            humilidy: Apidata.main.humidity,
-            wind: Apidata.wind.speed.toFixed(1),
-            rain: Apidata.rain ? Apidata.rain['1h'] : null,
-            windDirect: Apidata.wind.deg,
+            description: apiData.weather[0].description,
+            icon: `https://openweathermap.org/img/wn/${apiData.weather[0].icon}@2x.png`,
+            temperature: Math.round(apiData.main.temp),
+            feelTemp: Math.round(apiData.main.feels_like),
+            humilidy: apiData.main.humidity,
+            wind: apiData.wind.speed.toFixed(1),
+            rain: apiData.rain ? apiData.rain['1h'] : null,
+            windDirect: apiData.wind.deg,
             updatedTime: formmatedTime,
             updatedDate: formattedDate,
             waitToUpdate: waitingTime,
@@ -63,7 +75,7 @@ function App() {
 
   const fetchweatherForecast = () => {
     try {
-      return fetch(`https://api.openweathermap.org/data/2.5/forecast?q=London&units=metric&appid=${apiKey}`)
+      return fetch(`${weather_URL}/forecast?lat=${displayCity.lat}&lon=${displayCity.lon}&units=metric&appid=${apiKey}`)
         .then((response) => response.json())
         .then((apiData) => {
           const trimData = apiData.list.slice(0, 10)
@@ -97,7 +109,7 @@ function App() {
       }
     }
     fetchData()
-  }, [])
+  }, [displayCity])
 
   const handleRefresh = async () => {
     setIsLoading(true)
@@ -119,7 +131,6 @@ function App() {
       }, currentWeather.waitToUpdate * 60 * 1000);
     }, 2000);
   }
-
   return (
     <>
       <Container>
@@ -127,7 +138,10 @@ function App() {
           weatherData={weatherData}
           handleRefresh={handleRefresh}
           isLoading={isLoading}
-          disabled={refreshBtnDisabled} />
+          disabled={refreshBtnDisabled}
+          searchHandler={onSearchChangeHandler}
+          displayCity={displayCity.city}
+        />
         <ForcastCard weatherForecast={weatherForecast} />
       </Container>
     </>

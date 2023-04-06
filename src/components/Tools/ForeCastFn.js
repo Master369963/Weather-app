@@ -37,3 +37,19 @@ export const getShowdayData = ({ weatherForecast }, day) => {
   })
   return groupData
 }
+
+export const filterDuplicateCities = (cities) => {
+  const uniqueCities = {}
+  const cityNames = new Set()
+  cities.forEach((city) => {
+    if (!cityNames.has(city.label)) {
+      uniqueCities[city.label] = {
+        value: city.value,
+        label: city.label
+      }
+
+      cityNames.add(city.label)
+    }
+  })
+  return Object.values(uniqueCities);
+}

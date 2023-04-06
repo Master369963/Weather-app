@@ -8,6 +8,41 @@ export const FlexSBBox = styled.div`
   gap: 1rem;
 `
 
+export const LogoBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  img{
+    max-width: 50%;
+    max-height: 40px;
+      opacity: 0.5;
+      transition: opacity .2s;
+    &:hover{
+      opacity: 1;
+    }
+  }
+  
+  svg {
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+
+    path {
+      color: var(--text_default_light);
+      transition: color .2s;
+
+      &:hover {
+        color: var(--text_default);
+      }
+
+      &:active {
+        color:var(--secondary);
+      }
+    }
+  }
+`
+
 export const MainContent = styled.div`
   padding: 2rem;
   border-radius: 10px;
@@ -16,7 +51,7 @@ export const MainContent = styled.div`
 
 export const TitleBox = styled.div`
   display: flex;
-  align-items: center;
+  align-items: top;
   justify-content: space-between;
   margin-bottom: 1.5rem;
 `
@@ -24,6 +59,11 @@ export const TitleBox = styled.div`
 export const Location = styled.h2`
   color: var(--text_strong);
   font-size: 2.8rem;
+
+  svg {
+    width:15px;
+    height:15px;
+  }
 `
 
 export const CurrentWeather = styled(FlexSBBox)`

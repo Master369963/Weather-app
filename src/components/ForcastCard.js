@@ -13,13 +13,13 @@ const ForecastCard = ({ weatherForecast }) => {
   }
 
   const showday = getShowdayList(weatherForecast)
+
   return (
     <Card>
       <ForecastContent>
         <DescriptionContent mb='1rem' size='1.4rem'>5-day Forecast</DescriptionContent>
 
         {showday.map((day) => {
-
           const showdayData = getShowdayData(weatherForecast, day)
           const showdayOutput = showdayData.map((item, index) => {
             const formattedData = formatweatherForecast(item)

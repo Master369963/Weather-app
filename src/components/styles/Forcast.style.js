@@ -72,6 +72,7 @@ export const TimeBox = styled.div`
 
 export const AccItem = styled.div`
   position:relative;
+  z-index: 0;
 `
 export const AccBox = styled.section`
   overflow: hidden;
