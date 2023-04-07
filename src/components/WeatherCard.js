@@ -2,11 +2,11 @@ import { Humidity, Wind, Rain, Refresh } from './Tools/Icon'
 import { LogoBox, Location, Image, Button, UpdateBox, CurrentWeather, Temperature, InfoBox, MainContent, TitleBox, InfoGroup, BtnCaption, } from './styles/WeatherCard'
 import { ImgCaption, GeneralContent, StrongContent, StickyCard } from './styles/GlobalStyle.style'
 import logo from './styles/happyday logo.png'
+import * as weatherIcons from '../weatherIcons'
 import WeatherSetting from './SearchCity'
 
 
 const WeatherCard = ({ weatherData, handleRefresh, isLoading, disabled, searchHandler, displayCity }) => {
-
   return (
     <StickyCard>
       <LogoBox>
@@ -26,7 +26,7 @@ const WeatherCard = ({ weatherData, handleRefresh, isLoading, disabled, searchHa
           </div>
           <Image>
             {weatherData.icon &&
-              <img src={weatherData.icon} alt="weather icon" />
+              <img src={weatherIcons[`icon${weatherData.icon}`]} alt={weatherData.description} />
             }
           </Image>
         </CurrentWeather>

@@ -22,7 +22,7 @@ export const LogoBox = styled.div`
       opacity: 1;
     }
   }
-  
+
   svg {
     height: 20px;
     width: 20px;
@@ -54,11 +54,16 @@ export const TitleBox = styled.div`
   align-items: top;
   justify-content: space-between;
   margin-bottom: 1.5rem;
+
+  p {
+    margin-top: 2px;
+  }
 `
 
 export const Location = styled.h2`
   color: var(--text_strong);
   font-size: 2.8rem;
+  font-weight: 600;
 
   svg {
     width:15px;

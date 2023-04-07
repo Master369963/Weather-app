@@ -24,9 +24,10 @@ export const getShowdayList = ({ weatherForecast }) => {
 
 export const formatweatherForecast = (item) => {
   const time = formatDate(item.dt).hour
-  const icon = `https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`
+  // const icon = `https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`
+  const icon = item.weather[0].icon
   const description = item.weather[0].description
-  const rain = item.pop * 100
+  const rain = item.pop > 0.1 ? item.pop * 100 : null
   const temp = Math.round(item.main.temp)
   return ({ time, icon, description, rain, temp })
 }

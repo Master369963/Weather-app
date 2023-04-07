@@ -1,8 +1,9 @@
 import './styles/Forcast.style'
-import { AccBox, AccInput, AccItem, AccLabel, AccBody, ForcastImg, ForecastContent, BoldContent, TimeBox, DescriptionContent, AccIcon } from './styles/Forcast.style'
-import { Card, FlexCenterBox, ImgCaption, StrongContent } from './styles/GlobalStyle.style'
+import { AccBox, AccInput, AccItem, AccLabel, AccBody, ForcastImg, ForecastContent, BoldContent, TimeBox, DescriptionContent, AccIcon, ForecastItems } from './styles/Forcast.style'
+import { Card, ImgCaption, StrongContent } from './styles/GlobalStyle.style'
 import { Clock } from './Tools/Icon'
 import { getShowdayList, formatweatherForecast, getShowdayData } from './Tools/ForeCastFn'
+import * as weatherIcons from '../weatherIcons'
 
 const ForecastCard = ({ weatherForecast }) => {
 
@@ -23,19 +24,20 @@ const ForecastCard = ({ weatherForecast }) => {
           const showdayData = getShowdayData(weatherForecast, day)
           const showdayOutput = showdayData.map((item, index) => {
             const formattedData = formatweatherForecast(item)
+
             return (
-              <FlexCenterBox gap='1rem' key={index}>
+              <ForecastItems key={index}>
                 <TimeBox>
                   <Clock />
                   <StrongContent>{formattedData.time}</StrongContent>
                 </TimeBox>
                 <ForcastImg>
-                  <img src={formattedData.icon} alt="" />
+                  <img src={weatherIcons[`icon${formattedData.icon}`]} alt={formattedData.description} />
                   {formattedData.rain > 0 ? <ImgCaption>{Math.round(formattedData.rain)}%</ImgCaption> : null}
                 </ForcastImg>
                 <DescriptionContent>{formattedData.description}</DescriptionContent>
                 <BoldContent>{formattedData.temp}°C</BoldContent>
-              </FlexCenterBox>
+              </ForecastItems>
             )
           })
 

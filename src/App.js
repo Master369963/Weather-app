@@ -8,25 +8,14 @@ import { apiKey, weather_URL } from './components/Tools/Api';
 
 
 function App() {
-  const [weatherData, setWeatherData] = useState({
-    // description: '',
-    // icon: '',
-    // temperature: 0,
-    // feelTemp: 0,
-    // humilidy: 0,
-    // wind: 0,
-    // rain: 0,
-    // windDirect: 0,
-    // updatedTime: '',
-    // updatedDate: '',
-  })
+  const [weatherData, setWeatherData] = useState({})
   const [weatherForecast, setweatherForecast] = useState({
     weatherForecast: [],
   })
   const [isLoading, setIsLoading] = useState(false)
   const [refreshBtnDisabled, setRefreshBtnDisabled] = useState(true)
   const [displayCity, setDisplayCity] = useState({
-    city: 'London',
+    city: 'London, GB',
     lat: 51.5073,
     lon: -0.1276,
   })
@@ -34,10 +23,6 @@ function App() {
   const onSearchChangeHandler = (searchValue) => {
     const [lat, lon] = searchValue.value.split(" ")
     setDisplayCity({ lat, lon, city: searchValue.label })
-
-
-    console.log('app', searchValue, lat, lon)
-
   }
 
   const fetchCurrentWeather = () => {
@@ -54,7 +39,7 @@ function App() {
 
           return {
             description: apiData.weather[0].description,
-            icon: `https://openweathermap.org/img/wn/${apiData.weather[0].icon}@2x.png`,
+            icon: apiData.weather[0].icon,
             temperature: Math.round(apiData.main.temp),
             feelTemp: Math.round(apiData.main.feels_like),
             humilidy: apiData.main.humidity,
@@ -72,14 +57,11 @@ function App() {
     }
   }
 
-
   const fetchweatherForecast = () => {
     try {
       return fetch(`${weather_URL}/forecast?lat=${displayCity.lat}&lon=${displayCity.lon}&units=metric&appid=${apiKey}`)
         .then((response) => response.json())
         .then((apiData) => {
-          const trimData = apiData.list.slice(0, 10)
-
           return {
             weatherForecast: apiData.list,
           }

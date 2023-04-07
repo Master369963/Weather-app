@@ -1,19 +1,18 @@
 import styled from 'styled-components'
 import { MainContent } from './WeatherCard'
-import { customMedia } from './GlobalStyle.style'
+import { customMedia, FlexCenterBox } from './GlobalStyle.style'
 
 export const ForecastContent = styled(MainContent)`
   background: var(--primary_light_a005);
 `
 
-export const ItemBox = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  padding: 0 1rem;
-  border-bottom: 1px solid rgb(255 255 255 / 70%);
-  /* width: 400px; */
+export const ForecastItems = styled(FlexCenterBox)`
+  gap: 1.5rem;
+
+  ${customMedia.lessThan("small")`
+    gap: 1rem;
+  `
+  }
 `
 
 export const DescriptionContent = styled.p`
@@ -38,11 +37,10 @@ export const ForecastWrapper = styled.div`
 
 export const ForcastImg = styled.div`
   position: relative;
-  top: -10px;
 
   img {
+    display: block;
     position: relative;
-    top: 10px;
     width: 50px;
     height: 50px;
   }
@@ -57,17 +55,22 @@ export const BoldContent = styled.p`
 export const TimeBox = styled.div`
   display: flex;
   align-items: center;
-  flex-basis: 75px;
+  flex-basis: 65px;
   gap: 0.5rem;
+
+  p {
+    font-size: 1.5rem;
+  }
+
+  svg {
+    width: 15px;
+    height: 15px;
+  }
 
   ${customMedia.lessThan("mobile")`
     flex-basis: 65px;
-
-    svg{
-      width:20px;
-      height:20px;
-    }
-  `}
+  `
+  }
 `
 
 export const AccItem = styled.div`
@@ -95,7 +98,7 @@ export const AccLabel = styled.label`
 
 export const AccBody = styled.div`
   display: none;
-  padding: 1rem 2rem;
+  padding: 1rem 1.5rem;
   width: 100%;
   color: rgba(0,0,0,.54);
   font-size: 11pt;
@@ -103,7 +106,21 @@ export const AccBody = styled.div`
 
   ${customMedia.lessThan("mobile")`
     padding: 1rem 0.5rem;
-  `}
+  `
+  }
+
+  > div > div:nth-child(2){
+    background: var(--primary_light_a005);
+  }
+
+  div:first-child > div:nth-child(2) {
+      border-top-left-radius: 50%;
+      border-top-right-radius: 50%;
+  }
+  div:last-child > div:nth-child(2) {
+      border-bottom-left-radius: 50%;
+      border-bottom-right-radius: 50%;
+  }
 `
 
 export const AccIcon = styled.i`

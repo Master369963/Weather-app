@@ -5,6 +5,7 @@ export const customMedia = generateMedia({
   desktop: "78em", //1248px
   tablet: "60em",  //960px
   mobile: "46em",  //736px
+  small: "25em",  //400px
 })
 
 export const Container = styled.div`
