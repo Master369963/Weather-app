@@ -105,13 +105,16 @@ function App() {
     setWeatherData({ ...currentWeather })
     setweatherForecast({ ...forecastWeather })
 
-    setIsLoading(false)
-    setRefreshBtnDisabled(true)
-
     setTimeout(() => {
-      setRefreshBtnDisabled(false)
-    }, currentWeather.waitToUpdate * 60 * 1000);
+      setIsLoading(false)
+      setRefreshBtnDisabled(true)
+
+      setTimeout(() => {
+        setRefreshBtnDisabled(false)
+      }, currentWeather.waitToUpdate * 60 * 1000)
+    }, 1000)
   }
+
   return (
     <>
       <Container>
