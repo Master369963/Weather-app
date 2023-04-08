@@ -30,7 +30,6 @@ function App() {
       return fetch(`${weather_URL}/weather?lat=${displayCity.lat}&lon=${displayCity.lon}&units=metric&appid=${apiKey}`)
         .then((response) => response.json())
         .then((apiData) => {
-          console.log('api1', apiData)
           const date = moment.unix(apiData.dt)
           const formattedDate = date.format('ddd, MMM D')
           const formmatedTime = date.format('HH:mm')
@@ -63,7 +62,6 @@ function App() {
       return fetch(`${weather_URL}/forecast?lat=${displayCity.lat}&lon=${displayCity.lon}&units=metric&appid=${apiKey}`)
         .then((response) => response.json())
         .then((apiData) => {
-          console.log('api2', apiData)
           return {
             weatherForecast: apiData.list,
           }
@@ -94,27 +92,6 @@ function App() {
   useEffect(() => {
     fetchData()
   }, [fetchData])
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const [currentWeather, forecastWeather] = await Promise.all([
-  //         fetchCurrentWeather(),
-  //         fetchweatherForecast(),
-  //       ])
-  //       setWeatherData({ ...currentWeather })
-  //       setweatherForecast({ ...forecastWeather })
-
-  //       setTimeout(() => {
-  //         setRefreshBtnDisabled(false)
-  //       }, currentWeather.waitToUpdate * 60 * 1000)
-
-  //     } catch (error) {
-  //       console.error(error)
-  //     }
-  //   }
-  //   fetchData()
-  // }, [displayCity])
 
   const handleRefresh = async () => {
     console.log('clicked')
