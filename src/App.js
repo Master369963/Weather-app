@@ -5,7 +5,7 @@ import WeatherCard from "./components/WeatherCard";
 import { useState, useEffect } from 'react';
 import moment from 'moment';
 import { apiKey, weather_URL } from './components/Tools/Api';
-
+import { useCallback } from 'react';
 
 function App() {
   const [weatherData, setWeatherData] = useState({})
@@ -25,16 +25,17 @@ function App() {
     setDisplayCity({ lat, lon, city: searchValue.label })
   }
 
-  const fetchCurrentWeather = () => {
+  const fetchCurrentWeather = useCallback(async () => {
     try {
       return fetch(`${weather_URL}/weather?lat=${displayCity.lat}&lon=${displayCity.lon}&units=metric&appid=${apiKey}`)
         .then((response) => response.json())
         .then((apiData) => {
+          console.log('api1', apiData)
           const date = moment.unix(apiData.dt)
           const formattedDate = date.format('ddd, MMM D')
           const formmatedTime = date.format('HH:mm')
           const currentTime = moment().format('HH:mm')
-          const activeBtnTime = date.add(15, 'minutes').format('HH:mm')
+          const activeBtnTime = date.add(12, 'minutes').format('HH:mm')
           const waitingTime = moment.duration(moment(activeBtnTime, 'HH:mm').diff(moment(currentTime, 'HH:mm'))).asMinutes()
 
           return {
@@ -55,13 +56,14 @@ function App() {
       console.error(error)
       return null
     }
-  }
+  }, [displayCity])
 
-  const fetchweatherForecast = () => {
+  const fetchweatherForecast = useCallback(async () => {
     try {
       return fetch(`${weather_URL}/forecast?lat=${displayCity.lat}&lon=${displayCity.lon}&units=metric&appid=${apiKey}`)
         .then((response) => response.json())
         .then((apiData) => {
+          console.log('api2', apiData)
           return {
             weatherForecast: apiData.list,
           }
@@ -70,30 +72,52 @@ function App() {
       console.error(error)
       return null
     }
-  }
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [currentWeather, forecastWeather] = await Promise.all([
-          fetchCurrentWeather(),
-          fetchweatherForecast(),
-        ])
-        setWeatherData({ ...currentWeather })
-        setweatherForecast({ ...forecastWeather })
-
-        setTimeout(() => {
-          setRefreshBtnDisabled(false)
-        }, currentWeather.waitToUpdate * 60 * 1000)
-
-      } catch (error) {
-        console.error(error)
-      }
-    }
-    fetchData()
   }, [displayCity])
 
+  const fetchData = useCallback(async () => {
+    const fetchingData = async () => {
+      const [currentWeather, forecastWeather] = await Promise.all([
+        fetchCurrentWeather(),
+        fetchweatherForecast(),
+      ])
+      setWeatherData({ ...currentWeather })
+      setweatherForecast({ ...forecastWeather })
+
+      setTimeout(() => {
+        setRefreshBtnDisabled(false)
+      }, currentWeather.waitToUpdate * 60 * 1000)
+    }
+    fetchingData()
+
+  }, [fetchCurrentWeather, fetchweatherForecast])
+
+  useEffect(() => {
+    fetchData()
+  }, [fetchData])
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const [currentWeather, forecastWeather] = await Promise.all([
+  //         fetchCurrentWeather(),
+  //         fetchweatherForecast(),
+  //       ])
+  //       setWeatherData({ ...currentWeather })
+  //       setweatherForecast({ ...forecastWeather })
+
+  //       setTimeout(() => {
+  //         setRefreshBtnDisabled(false)
+  //       }, currentWeather.waitToUpdate * 60 * 1000)
+
+  //     } catch (error) {
+  //       console.error(error)
+  //     }
+  //   }
+  //   fetchData()
+  // }, [displayCity])
+
   const handleRefresh = async () => {
+    console.log('clicked')
     setIsLoading(true)
 
     const [currentWeather, forecastWeather] = await Promise.all([
@@ -104,14 +128,12 @@ function App() {
     setWeatherData({ ...currentWeather })
     setweatherForecast({ ...forecastWeather })
 
-    setTimeout(() => {
-      setIsLoading(false);
-      setRefreshBtnDisabled(true)
+    setIsLoading(false)
+    setRefreshBtnDisabled(true)
 
-      setTimeout(() => {
-        setRefreshBtnDisabled(false);
-      }, currentWeather.waitToUpdate * 60 * 1000);
-    }, 2000);
+    setTimeout(() => {
+      setRefreshBtnDisabled(false)
+    }, currentWeather.waitToUpdate * 60 * 1000);
   }
   return (
     <>

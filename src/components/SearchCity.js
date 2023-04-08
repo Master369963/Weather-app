@@ -9,7 +9,6 @@ const SearchWrapper = styled.div`
   margin: 2rem 0;
 `
 
-
 const WeatherSetting = ({ onSearchChange }) => {
   const handleOnChange = (searchData) => {
     onSearchChange(searchData)
@@ -17,7 +16,7 @@ const WeatherSetting = ({ onSearchChange }) => {
 
 
   const loadOptions = (inputValue) => {
-    return fetch(`${geoApi_URL}/cities?minPopulation=100000&namePrefix=${inputValue}&limit=10`, geoApiOptions)
+    return fetch(`${geoApi_URL}/cities?minPopulation=100000&namePrefix=${inputValue}&types=CITY&limit=10`, geoApiOptions)
       .then((response) => response.json())
       .then((response) => {
         const allOptions = response.data.map((city) => {
