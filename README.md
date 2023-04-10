@@ -1,6 +1,6 @@
 # Happy Day - Weather App
 
-This is a weather app built with React which displays the current weather and 5-day forecast of a specific location.
+This is a weather app built with React which displays the current weather conditions and 5-day forecast for a given location.
 
 ## Live Demo
 
@@ -16,22 +16,22 @@ This is a weather app built with React which displays the current weather and 5-
 
 ## Features
 
-* Users can see the current weather of a specific location, including temperature, weather condition, and wind speed.
-* Users can see a 5-day forecast with 3-hour step, including the temperature and weather condition of each day.
-* Users can click the refresh button to get the latest weather information.
-* The web app is responsive and can be used on both desktop and mobile devices.
-* Users can add this app to their home screen for easy access by opening with the web browser and then follow the instructions for your device:
+As a user of this weather app, you can:
+
+* View the current weather of a specific location, including temperature, weather condition, and wind speed.
+* See a 5-day forecast with 3-hour step, including the temperature and weather condition of each day.
+* Click the refresh button to update the latest weather information.
+* Search for weather conditions by location using the search bar with auto-complete functionality.
+* Access the app on both desktop and mobile devices since it's responsive.
+* Add this app to your home screen for easy access by opening with the web browser and then follow the instructions for your device:
   - iOS: Tap the "Share" button in Safari, and then select "Add to Home Screen".
   - Android: Tap the "Menu" button in Chrome, and then select "Add to Home Screen".
-
-## Future Development
-
-The app currently only displays weather information for London by default. This will be addressed in future updates to allow for a more personalized experience, for example, adding a location search feature, allowing users to save their preferred locations.
 
 ## Technologies Used
 
 * React
 * OpenWeatherMap API
+* GeoDB Cities
 * styled-component
 * Progressive Web App (PWA)
 
