@@ -9,7 +9,7 @@ This is a weather app built with React which displays the current weather condit
 ## Project Screenshot(s)
 
 ### Main page
-![image](https://github.com/Master369963/weather-app/blob/main/ReadmeAssets/weather%20app.png)
+![image](https://github.com/Master369963/weather-app/blob/main/ReadmeAssets/mainPage.png)
 
 ### Favicon for iOS
 ![image](https://github.com/Master369963/weather-app/blob/main/ReadmeAssets/favicon%20for%20iOS.png)
