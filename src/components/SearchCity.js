@@ -14,23 +14,25 @@ const WeatherSetting = ({ onSearchChange }) => {
     onSearchChange(searchData)
   }
 
-
   const loadOptions = (inputValue) => {
     return fetch(`${geoApi_URL}/cities?minPopulation=100000&namePrefix=${inputValue}&types=CITY&limit=10`, geoApiOptions)
       .then((response) => response.json())
       .then((response) => {
-        const allOptions = response.data.map((city) => {
+        if (!response.message) {
+          const allOptions = response.data.map((city) => {
+            return {
+              value: `${city.latitude} ${city.longitude}`,
+              label: `${city.name}, ${city.countryCode} `,
+            }
+          })
+          const options = filterDuplicateCities(allOptions)
+
           return {
-            value: `${city.latitude} ${city.longitude}`,
-            label: `${city.name}, ${city.countryCode} `,
+            options,
           }
-        })
-        const options = filterDuplicateCities(allOptions)
-
-        return {
-          options,
+        } else {
+          return { options: [] }
         }
-
       })
       .catch((error) => console.err(error))
   }
@@ -97,7 +99,7 @@ const WeatherSetting = ({ onSearchChange }) => {
       </datalist> */}
       <AsyncPaginate
         placeholder="Search City"
-        debounceTimeout={600}
+        debounceTimeout={700}
         value=""
         loadOptions={loadOptions}
         onChange={handleOnChange}
