@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import { useState } from "react"
 import { AsyncPaginate } from "react-select-async-paginate"
 import { geoApiOptions, geoApi_URL } from "./Tools/Api"
 import { filterDuplicateCities } from "./Tools/ForeCastFn"
@@ -15,7 +14,10 @@ const WeatherSetting = ({ onSearchChange }) => {
   }
 
   const loadOptions = (inputValue) => {
-    return fetch(`${geoApi_URL}/cities?minPopulation=100000&namePrefix=${inputValue}&types=CITY&limit=10`, geoApiOptions)
+    return fetch(
+      `${geoApi_URL}/cities?minPopulation=100000&namePrefix=${inputValue}&types=CITY&limit=10`,
+      geoApiOptions
+    )
       .then((response) => response.json())
       .then((response) => {
         if (!response.message) {
@@ -37,42 +39,42 @@ const WeatherSetting = ({ onSearchChange }) => {
       .catch((error) => console.err(error))
   }
 
-  const inactivedColor = 'var(--primary_light_a03)'
+  const inactivedColor = "var(--primary_light_a03)"
 
   const customStyles = {
     option: (provided, state) => ({
       ...provided,
-      backgroundColor: state.isSelected ? '#007bff' : 'white',
-      color: state.isSelected ? 'white' : 'black',
-      fontSize: '1.6rem',
-      transition: 'all .2s ease',
-      '&:hover': {
-        backgroundColor: 'var(--secondary)',
-      }
+      backgroundColor: state.isSelected ? "#007bff" : "white",
+      color: state.isSelected ? "white" : "black",
+      fontSize: "1.6rem",
+      transition: "all .2s ease",
+      "&:hover": {
+        backgroundColor: "var(--secondary)",
+      },
     }),
     menuList: (provided) => ({
       ...provided,
-      backgroundColor: 'white',
-      border: '1px solid #ccc',
-      borderRadius: '4px',
-      maxHeight: '200px',
-      overflow: 'auto',
-      fontSize: '1.6rem',
+      backgroundColor: "white",
+      border: "1px solid #ccc",
+      borderRadius: "4px",
+      maxHeight: "200px",
+      overflow: "auto",
+      fontSize: "1.6rem",
     }),
     placeholder: (provided) => ({
       ...provided,
-      color: 'var(--text_default_light)',
+      color: "var(--text_default_light)",
     }),
     input: (provided) => ({
       ...provided,
-      color: 'white',
-      letterSpacing: '1px',
+      color: "white",
+      letterSpacing: "1px",
     }),
     control: (provided) => ({
       ...provided,
-      backgroundColor: 'transparent',
+      backgroundColor: "transparent",
       border: `1px solid ${inactivedColor}`,
-      fontSize: '1.6rem',
+      fontSize: "1.6rem",
     }),
     indicatorSeparator: (provided) => ({
       ...provided,
@@ -82,9 +84,9 @@ const WeatherSetting = ({ onSearchChange }) => {
       ...provided,
       svg: {
         fill: inactivedColor,
-      }
+      },
     }),
-  };
+  }
 
   return (
     <SearchWrapper>
@@ -109,7 +111,7 @@ const WeatherSetting = ({ onSearchChange }) => {
       {/* <SearchBtn>
         <GoSearch />
       </SearchBtn> */}
-    </SearchWrapper >
+    </SearchWrapper>
   )
 }
 
