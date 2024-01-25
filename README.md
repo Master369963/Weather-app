@@ -10,11 +10,15 @@ This is a weather app built with React which displays the current weather condit
 
 ### Main page
 
-![image](https://github.com/Master369963/weather-app/blob/main/ReadmeAssets/mainPage.png)
+![image](https://github.com/Master369963/weather-app/blob/main/ReadmeAssets/main-page.jpg)
 
-### Favicon for iOS
+### Search with auto-complete function
 
-![image](https://github.com/Master369963/weather-app/blob/main/ReadmeAssets/favicon%20for%20iOS.png)
+![image](https://github.com/Master369963/weather-app/blob/main/ReadmeAssets/search.jpg)
+
+### App on mobile
+
+![image](https://github.com/Master369963/weather-app/blob/main/ReadmeAssets/app-icon.jpg)
 
 ## Features
 
